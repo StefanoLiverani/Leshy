@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tesi</title>
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <!-- JQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <!-- Script JS -->
+  <script src="../js/main.js"></script>
+  <!-- CSS -->
+  <link href="/css/styles.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <div id="Leshynav">
+        <a href="#" id="reloadTitle" onclick="reloadPage()">
+          <h3>Leshy</h3>
+        </a>
+        <button id="emptyButton"><i class="bi bi-key-fill" onclick="showInput()"></i></button>
+        <input type="password" placeholder="Cancellazione manuale" required id="password" onkeyup="checkPsw()"
+          class="pass">
+        <div id="deleteButton">
+          <button class="buttonclass" id="manualDelete" onclick="manualDelete()">Elimina le cartelle</button>
+        </div>
+      </div>
+      <div id="introduzione">
+        <div class="text-justify" id="testomodulare">Questa web app permette di convertire gruppi di file.
+          Consente di caricare file dello stesso tipo per poterli convertire in formato RASH e successivamente
+          scaricarli.
+          Attualmente sono supportati DOCX e DOCBOOK come formati in ingresso e l'applicazione sfrutta Pandoc per
+          effettuare le conversioni.
+        </div>
+        <div class="text-center" id="inizio">
+          <button class="buttonclass" id="startLeshy" onclick="startLeshy()">Inizia</button>
+        </div>
+      </div>
+      <!--ZERO-->
+      <div class="col-sm-12 text-center" id="switch-zero">
+        <div class="whole">
+        </div>
+        <div class="text-center">
+          <form class="collectionForm" id="formautore">
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="author" id="author" placeholder="Autore">
+            </div>
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="name" id="name" placeholder="Nome della collezione">
+            </div>
+            <div class="col-md-12">
+              <input class="form-control" type="date" name="currentDate" id="currentDate">
+            </div>
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="description" id="description" placeholder="Descrizione">
+            </div>
+            <div class="col-md-12">
+              <input class="form-control" type="text" name="notes" id="notes" placeholder="Note">
+            </div>
+            <button class="buttonclass" form="formautore" id="formbutton" onclick="createUser()">Crea
+              Collection</button>
+          </form>
+        </div>
+      </div>
+      <!--SCHERMATA UPLOAD FILE-->
+      <div id="myCollection">ID Collection: </div>
+      <div id="switch-one">
+        <div class="col-sm-12 text-center">
+          <form action="/uploadForm" method="POST" id="formupload" enctype="multipart/form-data">
+            <input type="file" name="filetoupload" multiple id="filetoupload" class="form-control-file"/>
+            <p>Trascina qui i file oppure clicca nell'area</p>
+          </form>
+          <button type="button" form="formupload" class="buttonclass" onclick=uploadToFS()>Carica
+            File</button>
+        </div>
+      </div>
+      <!--SCHERMATA FORM SINGOLI FILE-->
+      <div id="switch-two">
+        <div class="col-sm-12 text-center">
+          <div id="uploadMessage">Caricamento in corso....</div>
+          <div id="fileUploadList">
+            <form id="listOfFiles">
+            </form>
+          </div>
+          <button type="button" form="listOfFiles" class="buttonclass" onclick="toEndPage()">Converti in
+            RASH</button>
+        </div>
+      </div>
+      <!--SCHERMATA ESITO CONVERSIONE-->
+      <div id="switch-three">
+        <div class="col-sm-12 text-center">
+          <p>I seguenti file sono stati convertiti con successo:</p>
+          <div id="tableResults">
+            <table id="resultTable">
+              <tr id="titleRow">
+                <th class="titleBar">File</th>
+                <th class="titleBar">Stato della conversione</th>
+              </tr>
+            </table>
+          </div>
+          <button type="button" class="buttonclass"id="downloadButton" onclick="download()">Scarica i file
+            convertiti</button>
+          <p id="zipCreation">Preparazione del pacchetto in corso...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</html>
